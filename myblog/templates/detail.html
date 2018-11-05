@@ -4,13 +4,13 @@
 <a class="backlink" href="/">Home</a>
 <h1>{{ post }}</h1>
 <p class="byline">
-  Posted by {{ post.author.username }} &mdash; {{ post.published_date }}
+  Posted by {{ post.author }} &mdash; {{ post.published_date }}
 </p>
 <div class="post-body">
   {{ post.text }}
 </div>
 <ul class="categories">
-  {% for category in post.categories.all %}
+  Categories: {% for category in post.category.all %}
     <li>{{ category }}</li>
   {% endfor %}
 </ul>

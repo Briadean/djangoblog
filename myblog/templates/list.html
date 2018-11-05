@@ -8,7 +8,7 @@
     <a href="{% url 'blog_detail' post.pk %}">{{ post }}</a>
   </h2>
     <p class="byline">
-      Posted by {{ post.author.username }} &mdash; {{ post.published_date }}
+      Posted by {{ post.author }} &mdash; {{ post.published_date }}
     </p>
     <div class="post-body">
       {{ post.text }}

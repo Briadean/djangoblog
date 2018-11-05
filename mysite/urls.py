@@ -21,7 +21,9 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from myblog.views import list_view
 from myblog.views import detail_view
+from myblog.views import add_post
 from myblog.views import UserViewSet, GroupViewSet, PostViewSet, CategoryViewSet
+
 
 router = routers.DefaultRouter()
 router.register(r"users", UserViewSet)
@@ -33,6 +35,7 @@ urlpatterns = [
     url(r"^", include(router.urls)),
     url(r"$", list_view, name="blog_index"),
     url(r'^posts/(?P<post_id>\d+)/$', detail_view, name="blog_detail"),
+    url(r'^add_post', add_post, name="add_post"),
     url(r"^api_auth/", include("rest_framework.urls", namespace="rest_framework"))
 ]
 

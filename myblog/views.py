@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.template import loader
-from myblog.models import Post
+
+from rest_framework import viewsets
+from myblog.models import Post, Category
+from django.contrib.auth.models import User, Group
+from myblog.serializers import UserSerializer, GroupSerializer, PostSerializer, CategorySerializer
 
 
 def stub_view(request, *args, **kwargs):
@@ -40,3 +43,27 @@ def detail_view(request, post_id):
         raise Http404
     context = {'post': post}
     return render(request, 'detail.html', context)
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """API Endpoint that allows users to be viewed or edited"""
+    queryset = User.objects.all().order_by("-date_joined")
+    serializer_class = UserSerializer
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """API Endpoint that allows groups to be viewed or edited"""
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    """API Endpoint that allows posts to be viewed or edited"""
+    queryset = Post.objects.all().order_by("-modified_date")
+    serializer_class = PostSerializer
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    """API Endpoint that allows posts to be viewed or edited"""
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer

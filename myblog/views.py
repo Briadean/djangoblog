@@ -53,7 +53,7 @@ def add_post(request):
     form = AddPost(request.POST)
     if form.is_valid():
         model_instance = form.save(commit=False)
-        model_instance.author = request.user
+        model_instance.author = request.User
         model_instance.published_date = timezone.now()
         model_instance.save()
         return redirect('/')
